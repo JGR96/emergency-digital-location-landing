@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Digital Location - Share Your Exact Location Instantly</title>
+    <meta name="description"
+        content="Share your exact location quickly and accurately using Google Plus Codes for emergency situations. No addresses needed.">
+
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Emergency Digital Location">
+    <meta property="og:description"
+        content="Share your exact location instantly for emergencies using Google Plus Codes">
+    <meta property="og:type" content="website">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #FBE7E3 0%, #F8D7DA 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            /* ya no necesitamos fondo de color */
+            padding: 0;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* asegura que la imagen no se deforme */
+            border-radius: 12px;
+            /* opcional, si quieres que respete la esquina redondeada */
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: #E74C3C;
+            font-weight: 600;
+        }
+
+        .cta-header {
+            background: #E74C3C;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .cta-header:hover {
+            transform: translateY(-2px);
+            background: #c0392b;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #E74C3C;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: #666;
+            /*margin-bottom: 40px;*/
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-demo {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 400px;
+            border: 2px solid rgba(231, 76, 60, 0.2);
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.1);
+        }
+
+        .plus-code-demo {
+            background: #E74C3C;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .demo-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            background: rgba(231, 76, 60, 0.1);
+            color: #E74C3C;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .demo-btn.primary {
+            background: #E74C3C;
+            color: white;
+            border-color: #E74C3C;
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(231, 76, 60, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            /*background: linear-gradient(45deg, #eecdca, #ec6455);*/
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            color: #E74C3C;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 80px 0;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #E74C3C;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            color: #E74C3C;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .step p {
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #E74C3C, #c0392b);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #E74C3C;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #E74C3C;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            border-top: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: #E74C3C;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #E74C3C;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: max-content;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                text-align: center;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Plus Code Animation */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .plus-code-demo {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 10px;
+            /* espacio entre los botones */
+        }
+
+        /* Botón deshabilitado */
+        .store-btn.disabled {
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 0 12px;
+        }
+
+        /* Solo la imagen con opacidad */
+        .store-btn.disabled img {
+            opacity: 0.6;
+            /* semitransparente */
+        }
+
+        /* Texto “Coming Soon” centrado, sin afectar la opacidad */
+        .store-btn.disabled .coming-soon {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .contact-tooltip {
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: #E74C3C;
+        }
+
+        .contact-tooltip .tooltip-text {
+            visibility: hidden;
+            width: max-content;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px 8px;
+            border-radius: 4px;
+
+            /* Positioning */
+            position: absolute;
+            bottom: 125%;
+            /* arriba del link */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+
+            /* Fade-in */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .contact-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="assets/images/logo-app.png" alt="Emergency Digital Location Logo">
+                    </div>
+                    <h1 id="title-app">Emergency Digital Location</h1>
+                </div>
+                <div class="store-buttons">
+                    <div class="store-btn disabled">
+                        <!-- <a href="https://play.google.com/store/apps/details?id=com.jugadev.emergencylocation"
+                            class="store-btn" target="_blank">
+                            <img src="assets/images/google-play-badge.png" alt="Get it on Google Play">
+                        </a> -->
+                        <img src="assets/images/google-play-badge.png" alt="Get it on Google Play">
+                        <span class="coming-soon coming-soon-app-store">Coming Soon</span>
+                    </div>
+                    <div class="store-btn disabled">
+                        <img src="assets/images/app-store-badge.png" alt="Download on the App Store">
+                        <span class="coming-soon coming-soon-app-store">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <!-- NEW: Beta notice -->
+                <p class="fade-in" id="beta-notice"
+                    style="color: #E74C3C; font-weight: 400; margin-bottom: 20px; max-width: max-content;">
+                    ⚠️ This app is in beta. Join our testers group to help us improve! ⚠️
+                </p>
+
+                <a href="https://groups.google.com/g/digital-emergency_testers" id="beta-button" target="_blank"
+                    class="btn btn-primary fade-in" style="margin-bottom: 20px;">
+                    Join Beta Testers Group
+                </a>
+
+                <h2 class="fade-in" style="padding-top: 10px;" id="hero-title">Share Your Exact Location Instantly</h2>
+                <p class="fade-in" id="hero-subtitle">Revolutionary emergency app using Google Plus Codes for precise
+                    location sharing when
+                    every second counts</p>
+
+                <div class="hero-demo fade-in">
+                    <p id="demo-label" style="font-weight: 500;"><strong>Your location becomes:</strong></p>
+                    <div class="plus-code-demo">8CMV2FJW+VC</div>
+                    <p id="demo-accuracy" style="color: #666; font-size: 14px;">3-meter accuracy • Works anywhere</p>
+
+                    <div class="demo-buttons">
+                        <button class="demo-btn">📋 <a id="copy-button">Copy</a></button>
+                        <button class="demo-btn primary">📤 <a id="share-button">Share</a></button>
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <span style="color: #666; font-size: 14px;" id="example-design">*Ejemplo del diseño de la
+                            app</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title" id="feature-title">Why Emergency Digital Location?</h2>
+                <p class="section-subtitle" id="feature-subtitle">Purpose-built for emergency situations where precise
+                    location sharing can
+                    save lives</p>
+
+                <div class="features-grid" id="features-container">
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Instant Location</h3>
+                        <p>Generate your precise Plus Code in seconds. No typing addresses or explaining directions.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <h3>3-Meter Precision</h3>
+                        <p>Google Plus Codes provide exact location accuracy down to 3 meters anywhere in the world.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Privacy First</h3>
+                        <p>Your location is processed only on your device. No data storage or sharing with third
+                            parties.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Works Everywhere</h3>
+                        <p>Rural areas, foreign countries, places without traditional addresses - Plus Codes work
+                            anywhere.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">📱</div>
+                        <h3>Simple Interface</h3>
+                        <p>Designed for stress situations. Large buttons, clear text, intuitive actions when you need
+                            them most.</p>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🚑</div>
+                        <h3>Emergency Ready</h3>
+                        <p>Compatible with Google Maps and emergency services worldwide. Responders know Plus Codes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title" id="how-it-works-title">How It Works</h2>
+                <p class="section-subtitle" id="how-it-works-subtitle">Three simple steps to share your exact location
+                    in any emergency</p>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 id="step1-title">Tap Location Button</h3>
+                        <p id="step1-desc">Open the app and tap "Get My Location" - your GPS coordinates are instantly
+                            captured</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 id="step2-title">Plus Code Generated</h3>
+                        <p id="step2-desc">Your location is converted to a short, shareable Plus Code like "8CMV2FJW+VC"
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 id="step3-title">Share Instantly</h3>
+                        <p id="step3-desc">Copy or share your Plus Code via text, call, or any messaging app. Responders
+                            can find you
+                            exactly</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" id="download">
+            <div class="container">
+                <h2 id="cta-title">Ready for Any Emergency?</h2>
+                <p id="cta-subtitle">Download Emergency Digital Location now and have precise location sharing at your
+                    fingertips</p>
+
+                <div class="cta-buttons">
+                    <div class="store-btn disabled">
+                        <!-- <a href="https://play.google.com/store/apps/details?id=com.jugadev.emergencylocation"
+                            class="store-btn" target="_blank">
+                            <img src="assets/images/google-play-badge.png" alt="Get it on Google Play">
+                        </a> -->
+                        <img src="assets/images/google-play-badge.png" alt="Get it on Google Play">
+                        <span class="coming-soon coming-soon-app-store">Coming Soon</span>
+                    </div>
+                    <div class="store-btn disabled">
+                        <img src="assets/images/app-store-badge.png" alt="Download on the App Store">
+                        <span class="coming-soon coming-soon-app-store">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="assets/images/logo-app.png" alt="Emergency Digital Location Logo">
+                    </div>
+                    <span style="color: #E74C3C; font-weight: 600; margin-left: 10px;" id="title-app-footer">Emergency
+                        Digital
+                        Location</span>
+                </div>
+
+                <div class="footer-links">
+                    <a><span id="contact-us"></span>:
+                        contact.jugadev@gmail.com</a>
+                    <a href="https://www.termsfeed.com/live/bfe9c66c-ac0b-4e37-9ce3-44688532575d" target="_blank"
+                        rel="noopener noreferrer" id="pivacy-policy">Privacy Policy</a>
+                    <a href="https://www.buymeacoffee.com/jugadev" target="_blank" rel="noopener noreferrer"
+                        id="support-title">☕ Buy Me A
+                        Coffee</a>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">
+                © <span id="year"></span> <span id="title-app-credits">Emergency Digital Location</span>.
+                <span id="built-codes">Built with Google Plus Codes technology.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="lang.js"></script>
+    <script>
+        const demoLocations = [
+            { code: "V75V+8MW", name: "Torre Eiffel, París" },
+            { code: "8FW4V75R+5V3", name: "Torre Eiffel, París" },
+            { code: "87G8Q4X9+V8", name: "Estatua de la Libertad, Nueva York" },
+            { code: "4RRH+4V2J9", name: "Ópera de Sídney" },
+            { code: "7FG9V2QC+V8", name: "Cristo Redentor, Río de Janeiro" }
+        ];
+
+        const plusCodeEl = document.getElementById("plus-code");
+        const demoLabelEl = document.getElementById("demo-label");
+
+        function updateDemo() {
+            const randomIndex = Math.floor(Math.random() * demoLocations.length);
+            const location = demoLocations[randomIndex];
+            plusCodeEl.textContent = location.code;
+            demoLabelEl.innerHTML = `<strong>${location.name} becomes:</strong>`;
+        }
+
+        /*
+        setInterval(updateDemo, 4000);
+        updateDemo();
+        */
+
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            observer.observe(el);
+        });
+
+        // Demo button interactions
+        document.querySelectorAll('.demo-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                if (this.textContent.includes('Copy')) {
+                    this.textContent = '✓ Copied!';
+                    this.style.background = '#27ae60';
+                    this.style.color = 'white';
+                    setTimeout(() => {
+                        this.textContent = '📋 Copy';
+                        this.style.background = '';
+                        this.style.color = '';
+                    }, 2000);
+                } else if (this.textContent.includes('Share')) {
+                    this.textContent = '✓ Shared!';
+                    setTimeout(() => {
+                        this.textContent = '📤 Share';
+                    }, 2000);
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userLang = navigator.language.toLowerCase();
+            const lang = userLang.startsWith("es") ? "es" : "en";
+            const t = texts[lang]; // texts viene de lang.js
+
+            document.getElementById("title-app").textContent = t.titleApp;
+            document.getElementById("title-app-footer").textContent = t.titleApp;
+            document.getElementById("title-app-credits").textContent = t.titleApp;
+
+            // Hero
+            document.getElementById("hero-title").textContent = t.heroTitle;
+            document.getElementById("hero-subtitle").textContent = t.heroSubtitle;
+            document.getElementById("beta-notice").textContent = t.betaNotice;
+            document.getElementById("beta-button").textContent = t.betaButton;
+            document.getElementById("demo-label").textContent = t.demoLocationLabel;
+            document.getElementById("demo-accuracy").textContent = t.demoAccuracy;
+            document.getElementById("copy-button").textContent = t.copyButton;
+            document.getElementById("share-button").textContent = t.shareButton;
+            document.getElementById("example-design").textContent = t.exampleDesign;
+
+            //Why use
+            document.getElementById("feature-title").textContent = t.featuresTitle;
+            document.getElementById("feature-subtitle").textContent = t.featuresSubtitle;
+
+            // Features dinámicos
+            const featuresContainer = document.getElementById("features-container");
+            featuresContainer.innerHTML = "";
+            t.features.forEach((f, i) => {
+                const div = document.createElement("div");
+                div.className = "feature";
+                div.innerHTML = `
+            <div class="feature-icon">${["⚡", "🎯", "🔒", "🌍", "📱", "🚑"][i]}</div>
+            <h3>${f.title}</h3>
+            <p>${f.desc}</p>
+        `;
+                featuresContainer.appendChild(div);
+            });
+
+            // How it works
+            document.getElementById("how-it-works-title").textContent = t.howItWorksTitle;
+            document.getElementById("how-it-works-subtitle").textContent = t.howItWorksSubtitle;
+            document.getElementById("step1-title").textContent = t.step1Title;
+            document.getElementById("step1-desc").textContent = t.step1Desc;
+            document.getElementById("step2-title").textContent = t.step2Title;
+            document.getElementById("step2-desc").textContent = t.step2Desc;
+            document.getElementById("step3-title").textContent = t.step3Title;
+            document.getElementById("step3-desc").textContent = t.step3Desc;
+            document.getElementById("cta-title").textContent = t.ctaTitle;
+            document.getElementById("cta-subtitle").textContent = t.ctaSubtitle;
+
+            document.getElementById("built-codes").textContent = t.builtCodes;
+
+            Array.from(document.getElementsByClassName("coming-soon-app-store")).forEach(el => {
+                el.textContent = t.comingSoon;
+            });
+
+            document.getElementById("contact-us").textContent = t.contactUs;
+            document.getElementById("pivacy-policy").textContent = t.privacyPolicy;
+            document.getElementById("support-title").textContent = t.supportTitle;
+
+        });
+
+    </script>
+</body>
+
+</html>
