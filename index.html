@@ -46,9 +46,9 @@
         .header-content {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: space-between;
         }
 
         .logo {
@@ -169,7 +169,7 @@
 
         /* Features */
         .features {
-            padding: 80px 0;
+            padding: 35px 0;
             background: rgba(255, 255, 255, 0.5);
         }
 
@@ -222,7 +222,7 @@
 
         /* How it works */
         .how-it-works {
-            padding: 80px 0;
+            padding: 35px 0;
         }
 
         .steps {
@@ -374,10 +374,19 @@
         @media (max-width: 768px) {
             .header-content {
                 text-align: center;
+                justify-content: center;
+            }
+
+            .logo h1 {
+                font-size: 20px;
             }
 
             .hero {
-                padding: 60px 0;
+                padding: 20px 0;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
             }
 
             .cta-buttons {
