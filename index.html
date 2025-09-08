@@ -159,6 +159,7 @@
             border-radius: 6px;
             font-size: 14px;
             font-weight: 500;
+            cursor: pointer;
         }
 
         .demo-btn.primary {
@@ -398,6 +399,10 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            #hero-title {
+                padding-top: 30px !important;
+            }
         }
 
         /* Animations */
@@ -511,7 +516,8 @@
             font-weight: 600;
             border-radius: 50px;
             /* aspecto pill */
-            width: max-content;
+            width: fit-content;
+            white-space: pre-line;
             /* se ajusta al texto */
             margin: 0px auto;
             /* centrado horizontal */
@@ -566,16 +572,6 @@
     <main>
         <section class="hero">
             <div class="container">
-                <!-- NEW: Beta notice -->
-                <!--  <p class="fade-in" id="beta-notice"
-                    style="color: #E74C3C; font-weight: 400; margin-bottom: 20px; max-width: max-content;">
-                    ⚠️ This app is in beta. Join our testers group to help us improve! ⚠️
-                </p>
-
-                <a href="https://groups.google.com/g/digital-emergency_testers" id="beta-button" target="_blank"
-                    class="btn btn-primary fade-in" style="margin-bottom: 20px;">
-                    Join Beta Testers Group
-                </a> -->
 
                 <div class="tooltip-launch fade-in">
                     <span id="launch-GPlay">🎉 Google Play Launch: September 21 🎉</span>
@@ -587,12 +583,17 @@
                     every second counts</p>
 
                 <div class="hero-demo fade-in">
-                    <p id="demo-label" style="font-weight: 500;"><strong>Your location becomes:</strong></p>
-                    <div class="plus-code-demo">8CMV2FJW+VC</div>
+                    <p id="demo-label" style="font-weight: 500;"></p>
+                    <div id="plus-code" class="plus-code-demo"></div>
                     <p id="demo-accuracy" style="color: #666; font-size: 14px;">3-meter accuracy • Works anywhere</p>
 
                     <div class="demo-buttons">
-                        <button class="demo-btn">📋 <a id="copy-button">Copy</a></button>
+                        <button class="demo-btn">
+                            <a id="maps-button" href="" target="_blank">
+                                <img src="assets/images/google_maps.png" width="60%"
+                                    alt="Emergency Digital Location Logo">
+                            </a>
+                        </button>
                         <button class="demo-btn primary">📤 <a id="share-button">Share</a></button>
                     </div>
 
@@ -732,8 +733,7 @@
                         <img src="assets/images/logo-app.png" alt="Emergency Digital Location Logo">
                     </div>
                     <span style="color: #E74C3C; font-weight: 600; margin-left: 10px;" id="title-app-footer">Emergency
-                        Digital
-                        Location</span>
+                        Digital Location</span>
                 </div>
 
                 <div class="footer-links">
@@ -742,8 +742,7 @@
                     <a href="https://www.termsfeed.com/live/bfe9c66c-ac0b-4e37-9ce3-44688532575d" target="_blank"
                         rel="noopener noreferrer" id="pivacy-policy">Privacy Policy</a>
                     <a href="https://www.buymeacoffee.com/jugadev" target="_blank" rel="noopener noreferrer"
-                        id="support-title">☕ Buy Me A
-                        Coffee</a>
+                        id="support-title">☕ Buy Me A Coffee</a>
                 </div>
             </div>
 
@@ -756,30 +755,6 @@
 
     <script src="lang.js"></script>
     <script>
-        const demoLocations = [
-            { code: "V75V+8MW", name: "Torre Eiffel, París" },
-            { code: "8FW4V75R+5V3", name: "Torre Eiffel, París" },
-            { code: "87G8Q4X9+V8", name: "Estatua de la Libertad, Nueva York" },
-            { code: "4RRH+4V2J9", name: "Ópera de Sídney" },
-            { code: "7FG9V2QC+V8", name: "Cristo Redentor, Río de Janeiro" }
-        ];
-
-        const plusCodeEl = document.getElementById("plus-code");
-        const demoLabelEl = document.getElementById("demo-label");
-
-        function updateDemo() {
-            const randomIndex = Math.floor(Math.random() * demoLocations.length);
-            const location = demoLocations[randomIndex];
-            plusCodeEl.textContent = location.code;
-            demoLabelEl.innerHTML = `<strong>${location.name} becomes:</strong>`;
-        }
-
-        /*
-        setInterval(updateDemo, 4000);
-        updateDemo();
-        */
-
-
         document.getElementById("year").textContent = new Date().getFullYear();
 
         // Smooth scrolling for anchor links
@@ -831,11 +806,8 @@
                         this.style.background = '';
                         this.style.color = '';
                     }, 2000);
-                } else if (this.textContent.includes('Share')) {
-                    this.textContent = '✓ Shared!';
-                    setTimeout(() => {
-                        this.textContent = '📤 Share';
-                    }, 2000);
+                } else if (this.textContent.includes('Share') || this.textContent.includes('Compartir')) {
+                    this.textContent = this.textContent.includes('Share') ? '✓ Shared!' : "✓ Compartido!";
                 }
             });
         });
@@ -854,9 +826,9 @@
             document.getElementById("hero-subtitle").textContent = t.heroSubtitle;
             //document.getElementById("beta-notice").textContent = t.betaNotice;
             //document.getElementById("beta-button").textContent = t.betaButton;
-            document.getElementById("demo-label").textContent = t.demoLocationLabel;
+            //document.getElementById("demo-label").textContent = t.demoLocationLabel;
             document.getElementById("demo-accuracy").textContent = t.demoAccuracy;
-            document.getElementById("copy-button").textContent = t.copyButton;
+            //document.getElementById("copy-button").textContent = t.copyButton;
             document.getElementById("share-button").textContent = t.shareButton;
             document.getElementById("example-design").textContent = t.exampleDesign;
 
@@ -902,6 +874,31 @@
 
             document.getElementById("launch-GPlay").textContent = t.launchGPlay;
             document.getElementById("join-telegram").textContent = t.joinTelegram;
+
+            //Se determina el lugar de ejemplo
+            const demoLocations = [
+                { code: "8FW4V75V+8QX", name: { es: "Torre Eiffel", en: "Eiffel Tower" } },
+                { code: "87G7MXQ4+M6R", name: { es: "Estatua de la Libertad", en: "Statue of Liberty" } },
+                { code: "4RRH46V8+74M", name: { es: "Ópera de Sídney", en: "Sydney Opera House" } },
+                { code: "589R2QXQ+6RJ", name: { es: "Cristo Redentor", en: "Christ the Redeemer" } },
+                { code: "8FH4C53F+PVF", name: { es: "Sagrada Familia", en: "Sagrada Família" } }
+            ];
+
+            const plusCodeEl = document.getElementById("plus-code");
+            const demoLabelEl = document.getElementById("demo-label");
+            const mapsButton = document.getElementById("maps-button");
+
+            function updateDemo() {
+                const randomIndex = Math.floor(Math.random() * demoLocations.length);
+                const location = demoLocations[randomIndex];
+                plusCodeEl.textContent = location.code;
+                demoLabelEl.innerHTML = `<strong>${location.name[lang]}</strong>`;
+                mapsButton.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.code)}`;
+            }
+
+
+            setInterval(updateDemo, 1800000);
+            updateDemo();
 
         });
 
