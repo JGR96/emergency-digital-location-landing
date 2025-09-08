@@ -34,7 +34,9 @@ const texts = {
         comingSoon: "Coming Soon",
         contactUs: "Contact Us",
         privacyPolicy: "Privacy Policy",
-        supportTitle: "☕ Buy Me A Coffee"
+        supportTitle: "☕ Buy Me A Coffee",
+        joinTelegram: "Join on Telegram",
+        launchGPlay: "🎉 Google Play Launch: September 21 🎉"
     },
     es: {
         titleApp: "Ubicación Digital Emergencia",
@@ -71,7 +73,9 @@ const texts = {
         comingSoon: "Próximamente",
         contactUs: "Contáctanos",
         privacyPolicy: "Política de Privacidad",
-        supportTitle: "☕ Apóyame con un café"
+        supportTitle: "☕ Apóyame con un café",
+        joinTelegram: "Únete al canal de Telegram",
+        launchGPlay: "🎉 Lanzamiento Google Play: 21 Septiembre 🎉"
 
     }
 };

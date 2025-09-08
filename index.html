@@ -502,6 +502,26 @@
             visibility: visible;
             opacity: 1;
         }
+
+        .tooltip-launch {
+            background-color: white;
+            color: #E74C3C;
+            text-align: center;
+            padding: 5px 10px;
+            font-weight: 600;
+            border-radius: 50px;
+            /* aspecto pill */
+            width: max-content;
+            /* se ajusta al texto */
+            margin: 0px auto;
+            /* centrado horizontal */
+            display: flex;
+            /* para manejar flex si quieres icono + texto */
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            /* opcional: sombra para tooltip */
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -547,7 +567,7 @@
         <section class="hero">
             <div class="container">
                 <!-- NEW: Beta notice -->
-                <p class="fade-in" id="beta-notice"
+                <!--  <p class="fade-in" id="beta-notice"
                     style="color: #E74C3C; font-weight: 400; margin-bottom: 20px; max-width: max-content;">
                     ⚠️ This app is in beta. Join our testers group to help us improve! ⚠️
                 </p>
@@ -555,9 +575,13 @@
                 <a href="https://groups.google.com/g/digital-emergency_testers" id="beta-button" target="_blank"
                     class="btn btn-primary fade-in" style="margin-bottom: 20px;">
                     Join Beta Testers Group
-                </a>
+                </a> -->
 
-                <h2 class="fade-in" style="padding-top: 10px;" id="hero-title">Share Your Exact Location Instantly</h2>
+                <div class="tooltip-launch fade-in">
+                    <span id="launch-GPlay">🎉 Google Play Launch: September 21 🎉</span>
+                </div>
+
+                <h2 class="fade-in" style="padding-top: 15px;" id="hero-title">Share Your Exact Location Instantly</h2>
                 <p class="fade-in" id="hero-subtitle">Revolutionary emergency app using Google Plus Codes for precise
                     location sharing when
                     every second counts</p>
@@ -577,6 +601,20 @@
                             app</span>
                     </div>
                 </div>
+
+                <a class="fade-in" href="https://t.me/+toaYSHfp4-QzMDc0" target="_blank"
+                    style="display: inline-flex; align-items: center; justify-content: center; 
+          gap: 8px; background-color: #0088cc; color: white; 
+          padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 400; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);">
+
+                    <!-- Logo Telegram (SVG) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 240 240" fill="white">
+                        <path
+                            d="M120 0C53.73 0 0 53.73 0 120c0 66.27 53.73 120 120 120s120-53.73 120-120C240 53.73 186.27 0 120 0zM175.48 82.06l-21.27 100.53c-1.6 7.04-5.76 8.77-11.64 5.46l-32.1-23.68-15.48 14.9c-1.71 1.71-3.15 3.15-6.48 3.15l2.32-33.09 60.2-54.42c2.62-2.32-0.58-3.62-4.05-1.29l-74.36 46.78-32-10c-6.98-2.18-7.17-6.98 1.49-10.35l124.8-48.1c5.76-2.11 10.8 1.29 8.99 9.3z" />
+                    </svg>
+
+                    <span id="join-telegram">Join on Telegram</span>
+                </a>
             </div>
         </section>
 
@@ -814,8 +852,8 @@
             // Hero
             document.getElementById("hero-title").textContent = t.heroTitle;
             document.getElementById("hero-subtitle").textContent = t.heroSubtitle;
-            document.getElementById("beta-notice").textContent = t.betaNotice;
-            document.getElementById("beta-button").textContent = t.betaButton;
+            //document.getElementById("beta-notice").textContent = t.betaNotice;
+            //document.getElementById("beta-button").textContent = t.betaButton;
             document.getElementById("demo-label").textContent = t.demoLocationLabel;
             document.getElementById("demo-accuracy").textContent = t.demoAccuracy;
             document.getElementById("copy-button").textContent = t.copyButton;
@@ -861,6 +899,9 @@
             document.getElementById("contact-us").textContent = t.contactUs;
             document.getElementById("pivacy-policy").textContent = t.privacyPolicy;
             document.getElementById("support-title").textContent = t.supportTitle;
+
+            document.getElementById("launch-GPlay").textContent = t.launchGPlay;
+            document.getElementById("join-telegram").textContent = t.joinTelegram;
 
         });
 
