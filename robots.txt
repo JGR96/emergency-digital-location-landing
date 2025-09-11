@@ -1,0 +1,6 @@
+# Permitir a todos los motores indexar todo
+User-agent: *
+Allow: /
+
+# Indicar la ubicación del sitemap
+Sitemap: https://emergencydigitalocation.com/sitemap.xml
